@@ -1,0 +1,36 @@
+function [x3,x4] = CrossOver(Param,x1,x2)
+    
+    p = Param.p;
+    r = Param.r;
+    n = Param.n;
+    
+    A1 = zeros(numel(p),numel(r));
+    A2 = zeros(numel(p),numel(r));
+    A1 = zeros(numel(p),numel(r));
+    A2 = zeros(numel(p),numel(r));
+    type = randi([0 1]);
+    x3 = zeros(numel(p),numel(r),numel(n));
+    x4 = zeros(numel(p),numel(r),numel(n));    
+    
+    if type == 1
+        t = randi([1 numel(p)]);    
+        for nn = 1:numel(n)
+           A1 = [x1(1:t,:,nn) x2(t+1:end,:,nn)];
+           A2 = [x2(1:t,:,nn) x1(t+1:end,:,nn)];
+           x3(:,:,nn) = A1;
+           x4(:,:,nn) = A2;
+           
+        end
+    else
+        t = randi([1 numel(r)]);
+        for nn = 1:numel(n)
+           A1 = [x1(:,1:t,nn);x2(:,t+1:end,nn)];
+           A2 = [x2(:,1:t,nn);x1(:,t+1:end,nn)];
+           x3(:,:,nn) = A1;
+           x4(:,:,nn) = A2;
+        end
+    end
+    
+
+end
+

@@ -1,0 +1,199 @@
+clc;
+clear;
+close all;
+
+    Param=InputParameter();
+
+    Q = Param.Q;
+    AD = Param.AD;
+    DD = Param.DD;
+    LOS = Param.LOS;
+    Age = Param.Age;
+    Min_Age = Param.Min_Age;
+    Max_Age = Param.Max_Age;
+    PRF = Param.PRF;
+    RRF = Param.RRF;
+    PG = Param.PG;
+    RG = Param.RG;
+    RRT = Param.RRT;
+    PRT = Param.PRT;
+    PREQ = Param.PREQ;
+    SINGLE = Param.SINGLE;
+    PSN = Param.PSN;
+    RS = Param.RS;
+    SRPref = Param.SRPref;
+    PPrefeRF = Param.PPrefRF;
+    Adm_Plan = Param.Adm_Plan;
+    RD = Param.RD;
+    pr = Param.pr;
+    
+    p = Param.p;
+    r = Param.r;
+    d = Param.d;
+    k = Param.k;
+    g = Param.g;
+    w = Param.w;
+    n = Param.n;
+    s = Param.s;
+     
+    pen_sc1 = Param.pen_sc1;
+    pen_sc2 = Param.pen_sc2;
+    pen_sc3 = Param.pen_sc3;
+    pen_sc4 = Param.pen_sc4;
+    pen_sc5 = Param.pen_sc5;
+    pen_sc6 = Param.pen_sc6;
+    pen_sc7 = Param.pen_sc7;
+    pen_sc8 = Param.pen_sc8;
+    pen_sc9 = Param.pen_sc9; 
+    
+    nPop=500;     % number of population
+
+    pc=0.5;       % percent of crossover
+    nc=2*round(nPop*pc/2);  % number of crossover offspring
+
+    pm=1-pc;        %  percent of mutation
+    nm=round(nPop*pm);  % number of mutation offspring
+
+    beta=0.67;
+    
+    MaxIt=100;
+    TournamentSize=3;
+    
+    empty_individual.Sol=[];
+    empty_individual.Cost=[];
+    
+    pop=repmat(empty_individual,nPop,1);
+    
+    for ii=1:nPop
+        [pop(ii).Sol, pop(ii).Cost]=InitialSolution(Param);
+    end
+    
+    % Sort Population
+Costs=[pop.Cost];
+[Costs, SortOrder]=sort(Costs);
+pop=pop(SortOrder);
+
+% Store Best Solution
+BestSol=pop(1);
+
+% Array to Hold Best Cost Values
+BestCost=zeros(MaxIt,1);
+
+% Store Cost
+WorstCost=pop(end).Cost;
+
+UseRouletteWheelSelection=false;
+UseTournamentSelection=false;
+UseRandomSelection=false;
+
+%% Main Loop
+
+for it=1:MaxIt
+    
+    % Calculate Selection Probabilities
+    P=exp(-beta*Costs/WorstCost);
+    P=P/sum(P);
+    
+        choice=randi([1 3]);  
+        
+        switch choice
+            case 1
+               UseRouletteWheelSelection=true;
+            case 2
+                UseTournamentSelection=true;
+            case 3
+                UseRandomSelection=true;
+        end
+                
+    % Crossover
+    popc=repmat(empty_individual,nc/2,2);
+    for kk=1:nc/2
+        
+        % Select Parents Indices
+        if UseRouletteWheelSelection
+            i1=RouletteWheelSelection(P);
+            i2=RouletteWheelSelection(P);
+        end
+        if UseTournamentSelection
+            i1=TournamentSelection(pop,TournamentSize);
+            i2=TournamentSelection(pop,TournamentSize);
+        end
+        if UseRandomSelection
+            i1=randi([1 nPop]);
+            i2=randi([1 nPop]);
+        end
+
+        % Select Parents
+        p1=pop(i1);
+        p2=pop(i2);
+        
+        popc(kk,1)=p1;
+        popc(kk,2)=p2;
+        
+        % Apply Crossover
+        [x3,x4] = CrossOver(Param,p1.Sol.x,p2.Sol.x);
+        [popc(kk,1).Sol, popc(kk,1).Cost]=Update(Param,x3);
+        [popc(kk,2).Sol, popc(kk,2).Cost]=Update(Param,x4);
+        
+    end
+    popc=popc(:);
+    
+    
+    % Mutation
+    popm=repmat(empty_individual,nm,1);
+    for kk=1:nm
+        
+        % Select Parent
+        i=randi([1 nPop]);
+        popm(kk)=pop(i);
+        
+        % Apply Mutation
+        x2 = Mutate(Param,popm(kk).Sol.x);
+        [popm(kk).Sol, popm(kk).Cost]=Update(Param,x2);
+        
+    end
+    
+    % Create Merged Population
+    pop=[pop
+         popc
+         popm
+         ];
+     
+    % Sort Population
+    Costs=[pop.Cost];
+    [Costs, SortOrder]=sort(Costs);
+    pop=pop(SortOrder);
+    
+    % Update Worst Cost
+    WorstCost=max(WorstCost,pop(end).Cost);
+    
+    % Truncation
+    pop=pop(1:nPop);
+    Costs=Costs(1:nPop);
+    
+    % Store Best Solution Ever Found
+    BestSol=pop(1);
+    
+    % Store Best Cost Ever Found
+    BestCost(it)=BestSol.Cost;
+    
+    IT(it)=it;
+    
+    % Show Iteration Information
+    disp(['Iteration ' num2str(it) ', Best Cost = ' num2str(BestCost(it))]);
+    
+end
+
+figure;
+plot(IT,BestCost,'LineWidth',2);
+xlabel('Iteration');
+ylabel('Cost');
+    
+    
+    
+    
+    
+    
+    
+    
+

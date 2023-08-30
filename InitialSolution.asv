@@ -1,0 +1,59 @@
+function [] = InitialSolution(Param)
+    
+    Q = Param.Q;
+    AD = Param.AD;
+    DD = Param.DD;
+    LOS = Param.LOS;
+    Age = Param.Age;
+    Min_Age = Param.Min_Age;
+    Max_Age = Param.Max_Age;
+    PRF = Param.PRF;
+    RRF = Param.RRF;
+    PG = Param.PG;
+    RG = Param.RG;
+    RRT = Param.RRT;
+    PRT = Param.PRT;
+    PREQ = Param.PREQ;
+    SINGLE = Param.SINGLE;
+    PSN = Param.PSN;
+    RS = Param.RS;
+    SRPref = Param.SRPref;
+    PPrefeRF = Param.PPrefRF;
+    Adm_Plan = Param.Adm_Plan;
+    RD = Param.RD;
+    pr = Param.pr;
+    
+    p = Param.p;
+    r = Param.r;
+    d = Param.d;
+    k = Param.k;
+    g = Param.g;
+    w = Param.w;
+    n = Param.n;
+    s = Param.s;
+     
+    pen_sc1 = Param.pen_sc1;
+    pen_sc2 = Param.pen_sc2;
+    pen_sc3 = Param.pen_sc3;
+    pen_sc4 = Param.pen_sc4;
+    pen_sc5 = Param.pen_sc5;
+    pen_sc6 = Param.pen_sc6;
+    pen_sc7 = Param.pen_sc7;
+    pen_sc8 = Param.pen_sc8;
+    pen_sc9 = Param.pen_sc9;
+    
+    x = zeros(numel(p),numel(r),numel(n));
+    
+    for pp = 1:numel(p)
+        for rr = 1:numel(r)
+            
+            
+            
+        end
+    end
+    
+    
+    
+   
+end
+

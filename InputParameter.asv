@@ -1,0 +1,180 @@
+function Param = InpuParameter()
+
+    pen_sc1 = 10;
+    pen_sc2 = 10;
+    pen_sc3 = 10;
+    pen_sc4 = 10;
+    pen_sc5 = 10;
+    pen_sc6 = 10;
+    pen_sc7 = 10;
+    pen_sc8 = 10;
+    pen_sc9 = 10;  
+    
+    Q = [5 6 8 9 10];
+    AD = [10	15	20	15	18];
+    DD = [5	6	8	9	10];
+    LOS = [5	6	8	9	10];
+    Age = [38	26	34	30	41];
+    Min_Age = [15	15	15	15	15];
+    Max_Age = [80	80	80	80	80];
+    PRF =[0	0	0	1	0
+0	0	1	1	0
+1	0	1	0	0
+0	0	1	1	0
+0	0	1	1	0
+];
+
+RRF = [0	0	0	1	0
+0	0	1	1	0
+1	0	1	0	0
+0	0	1	1	0
+0	0	1	1	0
+];
+
+PG = [0	0	0	1	0
+0	0	1	1	0
+1	0	1	0	0
+0	0	1	1	0
+0	0	1	1	0
+];
+
+RG = [0	0	0	1	0
+0	0	1	1	0
+1	0	1	0	0
+0	0	1	1	0
+0	0	1	1	0
+];
+
+RRT = [0	0	0	1	0
+0	0	1	1	0
+1	0	1	0	0
+0	0	1	1	0
+0	0	1	1	0
+];
+
+PRT = [0	0	0	1	0
+0	0	1	1	0
+1	0	1	0	0
+0	0	1	1	0
+0	0	1	1	0
+];
+
+PREQ = [0	0	1	0	0
+];
+
+SINGLE = [0	0	1	0	0
+];    
+
+PSN(1,:,:) = [0	1	1	0	0
+0	1	1	1	0
+0	1	0	1	0
+1	0	0	0	1
+1	0	0	0	0
+];
+
+PSN(2,:,:) = [0	1	0	1	0
+1	1	1	1	0
+1	1	0	1	1
+1	1	1	1	1
+0	0	0	1	1
+];
+
+PSN(3,:,:) = [1	0	1	1	0
+1	1	0	0	1
+1	0	1	1	0
+0	0	0	0	0
+0	1	1	1	0
+];
+
+PSN(4,:,:) = [0	0	0	0	0
+1	1	0	1	0
+1	1	0	1	1
+0	1	1	0	1
+0	0	0	1	1
+];
+
+PSN(5,:,:) = [1	1	0	1	0
+0	1	0	0	1
+1	0	0	1	1
+0	1	0	1	0
+1	0	1	1	0
+];
+
+RS = [0	1	1	0	0
+0	1	1	1	0
+0	1	0	1	0
+1	0	0	0	1
+1	0	0	0	0
+];
+
+SRPref = [0	1	1	0	0
+0	1	1	1	0
+0	1	0	1	0
+1	0	0	0	1
+1	0	0	0	0
+];
+
+PPrefRF = [0	1	1	0	0
+0	1	1	1	0
+0	1	0	1	0
+1	0	0	0	1
+1	0	0	0	0
+];
+
+Adm_Plan = [0	1	1	0	0
+0	1	1	1	0
+0	1	0	1	0
+1	0	0	0	1
+1	0	0	0	0
+];
+
+RD = [0	1	1	0	0
+0	1	1	1	0
+0	1	0	1	0
+1	0	0	0	1
+1	0	0	0	0
+];
+
+pr = [0	1	0	1	1
+0	0	0	1	0
+1	1	1	1	0
+1	0	0	1	1
+1	1	0	0	1
+];
+
+    Param.Q = Q;
+    Param.AD = AD;
+    Param.DD = DD;
+    Param.LOS = ;
+    Param.Age = ;
+    Param.Min_Age = ;
+    Param.Max_Age = ;
+    Param.PRF = ;
+    Param.RRF = ;
+    Param.PG = ;
+    Param.RG = ;
+    Param.RRT = ;
+    Param.PRT = ;
+    Param.PREQ = ;
+    Param.SINGLE = ;
+    Param.PSN = ;
+    Param.RS = ;
+    Param.SRPref = ;
+    Param.PPrefRF = ;
+    Param.Adm_Plan = ;
+    Param.RD = ;
+    Param.pe = ;
+    
+    
+    
+    Param.pen_sc1 = pen_sc1;
+    Param.pen_sc2 = pen_sc2;
+    Param.pen_sc3 = pen_sc3;
+    Param.pen_sc4 = pen_sc4;
+    Param.pen_sc5 = pen_sc5;
+    Param.pen_sc6 = pen_sc6;
+    Param.pen_sc7 = pen_sc7;
+    Param.pen_sc8 = pen_sc8;
+    Param.pen_sc9 = pen_sc9; 
+        
+end
